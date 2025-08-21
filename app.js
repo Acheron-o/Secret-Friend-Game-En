@@ -20,8 +20,7 @@ function addFriend() {
     players.push(name);
    
     // Clear input field
-    name = document.querySelector("input");
-    name.value = "";
+    input.value = "";
 
     // Update the list on screen
     const list = document.getElementById('friendList');
@@ -32,37 +31,41 @@ function addFriend() {
         list.appendChild(li);
     });
 
-    result.innerHTML = "";
+    document.getElementById("result").innerHTML = "";
 }
 
-// Function to generate a random friend
-function randomFriend(totalFriends) {
-  return Math.floor(Math.random() * totalFriends);
+// Fisher–Yates shuffle function
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // swap
+    }
+    return array;
 }
 
 // Function to draw a secret friend
 function drawFriend() {
-    if (players.length < 2){
+    if (players.length < 2) {
         displayMessageOnScreen("h2", "At least 2 friends are required to perform the draw.");
         return;
     }
-    else {
-        let drawResult = randomFriend(players.length);
-        const drawnFriend = players[drawResult];
 
-        // Show the result on screen
-        const result = document.getElementById('result');
-        result.innerHTML = ""; // Clear previous result
-        const li = document.createElement('li');
-        li.textContent = drawnFriend;
-        result.appendChild(li);
+    // Shuffle the array so all positions have equal chance
+    let shuffled = shuffle([...players]); // copy array and shuffle
+    const drawnFriend = shuffled[0]; // pick the first element after shuffle
 
-        // Clear the players list
-        players = [];
-        document.getElementById('friendList').innerHTML = "";
+    // Show the result
+    const result = document.getElementById('result');
+    result.innerHTML = "";
+    const li = document.createElement('li');
+    li.textContent = drawnFriend;
+    result.appendChild(li);
 
-        displayMessageOnScreen("h2", "Draw completed successfully! Add new friends to perform another draw.");    
-    }
+    // Clear the players list
+    players = [];
+    document.getElementById('friendList').innerHTML = "";
+
+    displayMessageOnScreen("h2", "Draw completed successfully! Add new friends to perform another draw.");
 }
 
 // Function to display messages dynamically
