@@ -28,18 +28,12 @@ After adding the names, it will be possible to randomly draw a **secret friend**
 
 ---
 
-## 📂 Project Structure
-📁 secret-friend-game
-│-- index.html
-│-- style.css
-│-- app.js
-│-- assets/ (images and icons)
-
-
----
-
 ## 🚀 How to Run
 1. Clone this repository:
    ```bash
    git clone https://github.com/your-username/secret-friend-game.git
+2. Open index.html in your browser.
 
+3. Enter names into the input field and click Add.
+
+4. Click Draw Friend to randomly pick a secret friend
